@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Обновить</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<main class="container-fluid">
+    <h2 class="mb-3 mt-5 text-center">Обновить</h2>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <div th:if="${message}" class="alert alert-warning text-center" role="alert">
+                <strong th:text="${message}"></strong>
+            </div>
+            <form th:action="${'/startups/' + startup.id + '/edit'}" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-6 mb-2">
+                        <input type="text" class="form-control mb-2" name="name" placeholder="Название" required th:value="${startup.name}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="file" class="form-control mb-2" name="file" accept="image/*" >
+                    </div>
+
+                    <div class="col-6 mb-2">
+                        <input type="text" class="form-control mb-2" name="targetAudience" placeholder="Целевая аудитория" required th:value="${startup.targetAudience}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="text" class="form-control mb-2" name="uniqueOffer" placeholder="Уникальное предложение" required th:value="${startup.uniqueOffer}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="text" class="form-control mb-2" name="businessModel" placeholder="Бизнес-модель" required th:value="${startup.businessModel}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="number" class="form-control mb-2" name="tdp" min="1" step="1" placeholder="TDP"
+                               required th:value="${startup.tdp}">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <input type="number" class="form-control mb-2" name="price" min="0.01" step="0.01"
+                               placeholder="Цена" required th:value="${startup.price}">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <input type="text" class="form-control mb-2" name="description" placeholder="Описание" required th:value="${startup.description}">
+                    </div>
+                    <div class="col-6">
+                        <button class="w-100 btn btn-warning" type="submit">Обновить</button>
+                    </div>
+                    <div class="col-6">
+                        <button class="w-100 btn btn-secondary" type="reset">Сбросить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</main>
+</body>
+</html>
