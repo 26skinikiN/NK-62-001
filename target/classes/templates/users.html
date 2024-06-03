@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html th:data-bs-theme="${theme}" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Пользователи</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-info">Пользователи</h2>
+            </div>
+
+            <div class="content p-3">
+                <div th:each="i : ${users}" th:if="${i.id != user.id}" class="card shadow mb-2">
+                    <div class="card-body p-2">
+                        <form th:action="${'/users/' + i.id + '/edit'}" method="post" class="row">
+                            <div class="col">
+                                <input class="form-control" type="text" readonly th:value="${i.fio}">
+                            </div>
+                            <div class="col">
+                                <select name="role" required class="form-select">
+                                    <option th:each="role : ${roles}" th:value="${role}" th:label="${role.name}"
+                                            th:selected="${role == i.role}"></option>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-info" type="submit">Обновить</button>
+                            </div>
+                            <div class="col-auto">
+                                <a th:href="${'/users/' + i.id + '/delete'}" class="btn btn-danger">Удалить</a>
+                            </div>
+                            <div class="col-2">
+                                <a th:if="${i.enabled == true}" th:href="${'/users/' + i.id + '/enabled'}" class="btn btn-warning w-100">Заблокировать</a>
+                                <a th:if="${i.enabled == false}" th:href="${'/users/' + i.id + '/enabled'}" class="btn btn-warning w-100">Разблокировать</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

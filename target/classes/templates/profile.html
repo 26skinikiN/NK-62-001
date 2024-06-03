@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html th:data-bs-theme="${theme}" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Профиль</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container text-center w-25">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-info">Профиль</h2>
+            </div>
+
+            <div th:if="${message}" class="alert alert-warning text-center" role="alert">
+                <strong th:text="${message}"></strong>
+            </div>
+
+            <div class="content p-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <form action="/profile/edit" method="post">
+                            <input type="text" class="form-control mb-2" required placeholder="Имя" name="fio"
+                                   th:value="${user.fio}">
+                            <button type="submit" class="btn btn-info w-100">Обновить имя</button>
+                            <!--                    <a href="/profile/theme" class="btn btn-info w-100 mb-2">Изменить тему</a>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content p-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <form action="/profile/password" method="post">
+                            <input type="password" class="form-control mb-2" required placeholder="Пароль"
+                                   name="password">
+                            <input type="password" class="form-control mb-2" required placeholder="Подтвердите пароль"
+                                   name="password_repeat">
+                            <button type="submit" class="btn btn-info w-100">Обновить пароль</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

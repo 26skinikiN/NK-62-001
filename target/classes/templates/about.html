@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html th:data-bs-theme="${theme}" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Главная</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-info">Главная</h2>
+            </div>
+
+            <div class="row">
+                <div class="col text-center">
+                    <p class="fs-1">Ваш надежный партнер в сфере <br> IT-стартапов</p>
+                    <p class="fs-4">С помощью нашего сервиса Вы с легкостью сможете инвестировать в свое будущее</p>
+                    <div>
+                        <a href="/login" class="btn btn-info w-25">Вход</a>
+                        <a href="/reg" class="btn btn-info w-25">Регистрация</a>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="/img/Pict1.png" alt="about" class="shadow w-100">
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

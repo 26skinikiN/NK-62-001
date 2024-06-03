@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html th:data-bs-theme="${theme}" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Добавить</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-info">Добавить</h2>
+            </div>
+
+            <div th:if="${message}" class="alert alert-warning text-center" role="alert">
+                <strong th:text="${message}"></strong>
+            </div>
+
+            <div class="bg-light shadow border p-2">
+                <form action="/projects/add" method="post" enctype="multipart/form-data" class="row">
+                    <div class="col-6 mb-2">
+                        <p class="fs-4 m-0">Название</p>
+                        <input type="text" required class="form-control" name="name">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <p class="fs-4 m-0">Имя основателя</p>
+                        <input type="text" required class="form-control" name="founder">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <p class="fs-4 m-0">Необходимо собрать</p>
+                        <input type="number" required class="form-control" name="need" min="100" step="100">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <p class="fs-4 m-0">Дата</p>
+                        <input type="date" required class="form-control" name="date">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <p class="fs-4 m-0">Фото</p>
+                        <input type="file" required class="form-control" name="photo" accept="image/*">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <p class="fs-4 m-0">Основные направления стартапа</p>
+                        <textarea required class="form-control" name="description"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-info w-100">Добавить</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

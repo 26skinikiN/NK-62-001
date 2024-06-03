@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html th:data-bs-theme="${theme}" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${project.name}"></title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-info" th:text="${project.name}"></h2>
+            </div>
+
+            <div class="text-center mb-5">
+                <a href="/projects" class="btn btn-info w-25">Назад</a>
+                <a th:if="${role == 'ADMIN'}" th:href="${'/projects/' + project.id + '/edit'}"
+                   class="btn btn-info w-25">Обновить</a>
+                <a th:if="${role == 'ADMIN'}" th:href="${'/projects/' + project.id + '/delete'}"
+                   class="btn btn-danger w-25">Удалить</a>
+            </div>
+
+            <form th:if="${role == 'USER' and user.checkApps(project.id)}" method="post" class="row mb-5"
+                  th:action="${'/projects/' + project.id + '/app'}" >
+                <div class="col"></div>
+                <div class="col">
+                    <input type="number" required class="form-control" name="sum" placeholder="Введите сумму инвестиций"
+                           min="100" step="100">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-info">Подать заявку</button>
+                </div>
+                <div class="col"></div>
+            </form>
+
+
+            <div class="bg-light shadow border p-2 mb-5">
+                <div class="row">
+                    <div class="col-4">
+                        <img th:src="${'/img/' + project.photo}" alt="photo" class="w-100 shadow">
+                    </div>
+                    <div class="col">
+                        <p class="fs-4 mb-2" th:text="${'Имя основателя: ' + project.founder}"></p>
+                        <p class="fs-4 mb-2" th:text="${'Дата: ' + project.date}"></p>
+                        <p class="fs-4 mb-2" th:text="${'Необходимо собрать: ' + project.need +'$'}"></p>
+                        <p class="fs-5 m-0" th:text="${'Основные направления стартапа: ' + project.description}"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

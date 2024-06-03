@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html th:data-bs-theme="${theme}" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Стартапы</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-info">Стартапы</h2>
+            </div>
+
+            <div th:if="${role == 'ADMIN'}" class="text-center mb-5">
+                <a href="/projects/add" class="btn btn-info w-25">Добавить</a>
+            </div>
+
+            <form action="/projects/filter" method="get" class="row mb-5">
+                <div class="col">
+                    <input type="text" class="form-control" name="name" th:value="${name}" placeholder="Название">
+                </div>
+                <div class="col">
+                    <select name="filter" required class="form-select">
+                        <option value="1" th:selected="${filter == 1}">От А до Я</option>
+                        <option value="2" th:selected="${filter == 2}">От Я до А</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-info">Поиск</button>
+                </div>
+            </form>
+
+            <div class="row">
+                <div th:each="i : ${projects}" class="col-4 mb-2">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <div class="text-center align-content-center" style="height: 250px">
+                                <img th:src="${'/img/' + i.photo}" alt="photo" class="shadow"
+                                     style="max-width: 100%;max-height: 250px">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="fs-4 text-center mb-1" th:text="${i.name}"></p>
+                            <p class="fs-4 m-0" th:text="${'Имя основателя: ' + i.founder}"></p>
+                            <p class="fs-4 m-0" th:text="${'Дата: ' + i.date}"></p>
+                            <p class="fs-4 m-0" th:text="${'Необходимо собрать: ' + i.need +'$'}"></p>
+                            <a th:href="${'/projects/' + i.id}" class="btn btn-info w-100">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

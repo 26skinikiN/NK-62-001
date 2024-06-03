@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html th:data-bs-theme="${theme}" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Регистрация</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page login-page mt-5">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+
+            <div th:if="${message}" class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="alert alert-warning text-center" role="alert">
+                        <strong th:text="${message}"></strong>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header bg-info">
+                            <div class="block-heading text-center">
+                                <h2 class="text-white m-0">Регистрация</h2>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="/reg">
+                                <div class="mb-3">
+                                    <input class="form-control" type="email" placeholder="Почта" required
+                                           name="username">
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" type="text" placeholder="Имя" required name="fio">
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" type="password" placeholder="Пароль" required
+                                           name="password">
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" type="password" placeholder="Подтвердите пароль" required
+                                           name="password_repeat">
+                                </div>
+                                <button class="btn btn-info w-100" type="submit">Подтвердить</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col"></div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
