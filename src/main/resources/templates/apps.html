@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html th:data-bs-theme="${theme}" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Заявки</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-info">Заявки</h2>
+            </div>
+
+            <div th:if="${role == 'USER'}">
+                <div class="row">
+                    <div th:each="i : ${apps}" class="col-6 mb-2">
+                        <div class="card shadow rounded-5">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 mb-2">
+                                        <p class="fs-4 text-center m-0" th:text="${i.project.name}"></p>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <p class="fs-4 text-center m-0" th:text="${'Инвестиции: ' + i.sum + '$'}"></p>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <p class="fs-4 text-center m-0" th:text="${'Дата: ' + i.date}"></p>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <p class="fs-4 text-center m-0" th:text="${'Статус: ' + i.status.name}"></p>
+                                    </div>
+                                    <div th:if="${i.admin != null}" class="col-6 mb-2">
+                                        <p class="fs-4 text-center m-0" th:text="${'Админ: ' + i.admin.fio}"></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <a th:href="${'/projects/' + i.project.id}"
+                                           class="btn btn-info w-100">Подробнее</a>
+                                    </div>
+                                    <div th:if="${role == 'USER' and i.status.name() == 'WAITING'}" class="col">
+                                        <a th:href="${'/apps/' + i.id + '/delete'}"
+                                           class="btn btn-danger w-100">Отменить</a>
+                                    </div>
+                                    <div th:if="${role == 'ADMIN' and i.status.name() == 'WAITING'}" class="col">
+                                        <a th:href="${'/apps/' + i.id + '/done'}"
+                                           class="btn btn-info w-100">Подтвердить</a>
+                                    </div>
+                                    <div th:if="${role == 'ADMIN' and i.status.name() == 'WAITING'}" class="col">
+                                        <a th:href="${'/apps/' + i.id + '/reject'}"
+                                           class="btn btn-warning w-100">Отклонить</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div th:if="${role == 'ADMIN'}">
+                <div th:each="i : ${apps}" class="mb-2">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <p class="fs-4 text-center m-0" th:text="${i.project.name}"></p>
+                                </div>
+                                <div class="col">
+                                    <p class="fs-4 text-center m-0" th:text="${'Инвестиции: ' + i.sum}"></p>
+                                </div>
+                                <div class="col">
+                                    <p class="fs-4 text-center m-0" th:text="${'Дата: ' + i.date}"></p>
+                                </div>
+                                <div class="col">
+                                    <p class="fs-4 text-center m-0" th:text="${'Статус: ' + i.status.name}"></p>
+                                </div>
+                                <div th:if="${i.admin != null}" class="col">
+                                    <p class="fs-4 text-center m-0" th:text="${'Админ: ' + i.admin.fio}"></p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <a th:href="${'/projects/' + i.project.id}"
+                                       class="btn btn-info w-100">Подробнее</a>
+                                </div>
+                                <div th:if="${role == 'USER' and i.status.name() == 'WAITING'}" class="col">
+                                    <a th:href="${'/apps/' + i.id + '/delete'}"
+                                       class="btn btn-danger w-100">Отменить</a>
+                                </div>
+                                <div th:if="${role == 'ADMIN' and i.status.name() == 'WAITING'}" class="col">
+                                    <a th:href="${'/apps/' + i.id + '/done'}" class="btn btn-info w-100">Подтвердить</a>
+                                </div>
+                                <div th:if="${role == 'ADMIN' and i.status.name() == 'WAITING'}" class="col">
+                                    <a th:href="${'/apps/' + i.id + '/reject'}"
+                                       class="btn btn-warning w-100">Отклонить</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

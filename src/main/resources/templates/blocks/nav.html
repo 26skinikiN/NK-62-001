@@ -1,0 +1,30 @@
+<nav th:fragment="nav" class="navbar navbar-expand-lg shadow" data-bs-theme="dark" style="background-color: #7d53de">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="/img/logo.jpg" alt="logo" style="height: 50px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse fs-5" id="navbarColor01">
+            <ul class="navbar-nav me-auto ms-auto">
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link text-white" href="/users">Пользователи</a></li>
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link text-white" href="/stat">Аналитика</a></li>
+
+                <li class="nav-item"><a class="nav-link text-white" href="/about">Главная</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="/projects">Стартапы</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item"><a class="nav-link text-white" href="/apps">Заявки</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item"><a class="nav-link text-white" href="/profile">Профиль</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item"><a class="nav-link text-white" href="/logout">Выход</a></li>
+                <li th:if="${role == 'NOT'}" class="nav-item"><a class="nav-link text-white" href="/login">Вход</a></li>
+                <li th:if="${role == 'NOT'}" class="nav-item"><a class="nav-link text-white" href="/reg">Регистрация</a></li>
+
+            </ul>
+            <ul class="navbar-nav">
+                <li  class="nav-item"><span class="text-white" th:text="${fio}"></span></li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
